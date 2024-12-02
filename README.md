@@ -12,7 +12,7 @@ Deploy UVdesk with CI/CD on Elestio
 
 You can open UVdesk UI here:
 
-    URL: https://[CI_CD_DOMAIN]/admin
+    URL: https://[CI_CD_DOMAIN]
     email: [ADMIN_EMAIL]
     password: [ADMIN_PASSWORD]
 

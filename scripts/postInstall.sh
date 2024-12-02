@@ -279,86 +279,88 @@ doctrine:
 
 EOT
 
+sed -i "s|support_email: ~|support_email:\n        id: ${ADMIN_EMAIL}\n        name: UVDesk Community\n        mailer_id: mailer_0286|g" ./uvdesk_app/config/packages/uvdesk.yaml
+
 
 docker-compose up -d;
 sleep 15s;
 
-# curl 'https://uvdeskrgtjyru-u353.vm.elestio.app:24580/wizard/xhr/verify-database-credentials' \
-#   -H 'accept: */*' \
-#   -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
-#   -H 'cache-control: no-cache' \
-#   -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
-#   -H 'cookie: auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMzMDU4Yjg1LTYxNTUtNGYwNy1hMmU4LTQxMDJkMGZhMTIzNyIsImVtYWlsIjoiYW1zZWxsZW0uam9zZXBoQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFVMeHlycWtoME05eE84MDJuMHlBL2U4cjNsOWJHSTMwZU5MVjNNcUR3NzRCMTdtQ2hPQjBHIiwicHJvdmlkZXJOYW1lIjoiTE9DQUwiLCJuYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiaXNTdXBlckFkbWluIjpmYWxzZSwiYmlvIjpudWxsLCJhdWRpZW5jZSI6MCwicGljdHVyZUlkIjpudWxsLCJwcm92aWRlcklkIjoiIiwidGltZXpvbmUiOjAsImNyZWF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsInVwZGF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImxhc3RSZWFkTm90aWZpY2F0aW9ucyI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImludml0ZUlkIjpudWxsLCJhY3RpdmF0ZWQiOnRydWUsIm1hcmtldHBsYWNlIjp0cnVlLCJhY2NvdW50IjpudWxsLCJjb25uZWN0ZWRBY2NvdW50IjpmYWxzZSwibGFzdE9ubGluZSI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImlhdCI6MTczMzA1ODI4MX0._xkpxkZ0oO74pV90OT2VRX5EdlVyxZIoSjWppsGC988' \
-#   -H 'origin: https://uvdeskrgtjyru-u353.vm.elestio.app:24580' \
-#   -H 'pragma: no-cache' \
-#   -H 'priority: u=1, i' \
-#   -H 'referer: https://uvdeskrgtjyru-u353.vm.elestio.app:24580/' \
-#   -H 'sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"' \
-#   -H 'sec-ch-ua-mobile: ?0' \
-#   -H 'sec-ch-ua-platform: "Windows"' \
-#   -H 'sec-fetch-dest: empty' \
-#   -H 'sec-fetch-mode: cors' \
-#   -H 'sec-fetch-site: same-origin' \
-#   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
-#   -H 'x-requested-with: XMLHttpRequest' \
-#   --data-raw 'serverName=172.17.0.1&serverVersion=&serverPort=24306&username=root&password=rootPassword&database=uvdesk&createDatabase=1'
+curl 'https://uvdeskrgtjyru-u353.vm.elestio.app:24580/wizard/xhr/verify-database-credentials' \
+  -H 'accept: */*' \
+  -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
+  -H 'cookie: auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMzMDU4Yjg1LTYxNTUtNGYwNy1hMmU4LTQxMDJkMGZhMTIzNyIsImVtYWlsIjoiYW1zZWxsZW0uam9zZXBoQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFVMeHlycWtoME05eE84MDJuMHlBL2U4cjNsOWJHSTMwZU5MVjNNcUR3NzRCMTdtQ2hPQjBHIiwicHJvdmlkZXJOYW1lIjoiTE9DQUwiLCJuYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiaXNTdXBlckFkbWluIjpmYWxzZSwiYmlvIjpudWxsLCJhdWRpZW5jZSI6MCwicGljdHVyZUlkIjpudWxsLCJwcm92aWRlcklkIjoiIiwidGltZXpvbmUiOjAsImNyZWF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsInVwZGF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImxhc3RSZWFkTm90aWZpY2F0aW9ucyI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImludml0ZUlkIjpudWxsLCJhY3RpdmF0ZWQiOnRydWUsIm1hcmtldHBsYWNlIjp0cnVlLCJhY2NvdW50IjpudWxsLCJjb25uZWN0ZWRBY2NvdW50IjpmYWxzZSwibGFzdE9ubGluZSI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImlhdCI6MTczMzA1ODI4MX0._xkpxkZ0oO74pV90OT2VRX5EdlVyxZIoSjWppsGC988' \
+  -H 'origin: https://uvdeskrgtjyru-u353.vm.elestio.app:24580' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://uvdeskrgtjyru-u353.vm.elestio.app:24580/' \
+  -H 'sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
+  -H 'x-requested-with: XMLHttpRequest' \
+  --data-raw 'serverName=172.17.0.1&serverVersion=&serverPort=24306&username=root&password=rootPassword&database=uvdesk&createDatabase=1'
 
-#   curl 'https://uvdeskrgtjyru-u353.vm.elestio.app:24580/wizard/xhr/intermediary/super-user' \
-#   -H 'accept: */*' \
-#   -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
-#   -H 'cache-control: no-cache' \
-#   -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
-#   -H 'cookie: auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMzMDU4Yjg1LTYxNTUtNGYwNy1hMmU4LTQxMDJkMGZhMTIzNyIsImVtYWlsIjoiYW1zZWxsZW0uam9zZXBoQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFVMeHlycWtoME05eE84MDJuMHlBL2U4cjNsOWJHSTMwZU5MVjNNcUR3NzRCMTdtQ2hPQjBHIiwicHJvdmlkZXJOYW1lIjoiTE9DQUwiLCJuYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiaXNTdXBlckFkbWluIjpmYWxzZSwiYmlvIjpudWxsLCJhdWRpZW5jZSI6MCwicGljdHVyZUlkIjpudWxsLCJwcm92aWRlcklkIjoiIiwidGltZXpvbmUiOjAsImNyZWF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsInVwZGF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImxhc3RSZWFkTm90aWZpY2F0aW9ucyI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImludml0ZUlkIjpudWxsLCJhY3RpdmF0ZWQiOnRydWUsIm1hcmtldHBsYWNlIjp0cnVlLCJhY2NvdW50IjpudWxsLCJjb25uZWN0ZWRBY2NvdW50IjpmYWxzZSwibGFzdE9ubGluZSI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImlhdCI6MTczMzA1ODI4MX0._xkpxkZ0oO74pV90OT2VRX5EdlVyxZIoSjWppsGC988; PHPSESSID=lv0mp9us589nv2n5j6n6765570' \
-#   -H 'origin: https://uvdeskrgtjyru-u353.vm.elestio.app:24580' \
-#   -H 'pragma: no-cache' \
-#   -H 'priority: u=1, i' \
-#   -H 'referer: https://uvdeskrgtjyru-u353.vm.elestio.app:24580/' \
-#   -H 'sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"' \
-#   -H 'sec-ch-ua-mobile: ?0' \
-#   -H 'sec-ch-ua-platform: "Windows"' \
-#   -H 'sec-fetch-dest: empty' \
-#   -H 'sec-fetch-mode: cors' \
-#   -H 'sec-fetch-site: same-origin' \
-#   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
-#   -H 'x-requested-with: XMLHttpRequest' \
-#   --data-raw 'name=jojo&email=amsellem.joseph%40gmail.com&password=4hxs52AY-uBGw-tcMlMU24'
+  curl 'https://uvdeskrgtjyru-u353.vm.elestio.app:24580/wizard/xhr/intermediary/super-user' \
+  -H 'accept: */*' \
+  -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
+  -H 'cookie: auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMzMDU4Yjg1LTYxNTUtNGYwNy1hMmU4LTQxMDJkMGZhMTIzNyIsImVtYWlsIjoiYW1zZWxsZW0uam9zZXBoQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFVMeHlycWtoME05eE84MDJuMHlBL2U4cjNsOWJHSTMwZU5MVjNNcUR3NzRCMTdtQ2hPQjBHIiwicHJvdmlkZXJOYW1lIjoiTE9DQUwiLCJuYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiaXNTdXBlckFkbWluIjpmYWxzZSwiYmlvIjpudWxsLCJhdWRpZW5jZSI6MCwicGljdHVyZUlkIjpudWxsLCJwcm92aWRlcklkIjoiIiwidGltZXpvbmUiOjAsImNyZWF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsInVwZGF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImxhc3RSZWFkTm90aWZpY2F0aW9ucyI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImludml0ZUlkIjpudWxsLCJhY3RpdmF0ZWQiOnRydWUsIm1hcmtldHBsYWNlIjp0cnVlLCJhY2NvdW50IjpudWxsLCJjb25uZWN0ZWRBY2NvdW50IjpmYWxzZSwibGFzdE9ubGluZSI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImlhdCI6MTczMzA1ODI4MX0._xkpxkZ0oO74pV90OT2VRX5EdlVyxZIoSjWppsGC988; PHPSESSID=lv0mp9us589nv2n5j6n6765570' \
+  -H 'origin: https://uvdeskrgtjyru-u353.vm.elestio.app:24580' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://uvdeskrgtjyru-u353.vm.elestio.app:24580/' \
+  -H 'sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
+  -H 'x-requested-with: XMLHttpRequest' \
+  --data-raw 'name=jojo&email=amsellem.joseph%40gmail.com&password=4hxs52AY-uBGw-tcMlMU24'
 
-#   curl 'https://uvdeskrgtjyru-u353.vm.elestio.app:24580/wizard/xhr/website-configure' \
-#   -H 'accept: */*' \
-#   -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
-#   -H 'cache-control: no-cache' \
-#   -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
-#   -H 'cookie: auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMzMDU4Yjg1LTYxNTUtNGYwNy1hMmU4LTQxMDJkMGZhMTIzNyIsImVtYWlsIjoiYW1zZWxsZW0uam9zZXBoQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFVMeHlycWtoME05eE84MDJuMHlBL2U4cjNsOWJHSTMwZU5MVjNNcUR3NzRCMTdtQ2hPQjBHIiwicHJvdmlkZXJOYW1lIjoiTE9DQUwiLCJuYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiaXNTdXBlckFkbWluIjpmYWxzZSwiYmlvIjpudWxsLCJhdWRpZW5jZSI6MCwicGljdHVyZUlkIjpudWxsLCJwcm92aWRlcklkIjoiIiwidGltZXpvbmUiOjAsImNyZWF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsInVwZGF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImxhc3RSZWFkTm90aWZpY2F0aW9ucyI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImludml0ZUlkIjpudWxsLCJhY3RpdmF0ZWQiOnRydWUsIm1hcmtldHBsYWNlIjp0cnVlLCJhY2NvdW50IjpudWxsLCJjb25uZWN0ZWRBY2NvdW50IjpmYWxzZSwibGFzdE9ubGluZSI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImlhdCI6MTczMzA1ODI4MX0._xkpxkZ0oO74pV90OT2VRX5EdlVyxZIoSjWppsGC988; PHPSESSID=lv0mp9us589nv2n5j6n6765570' \
-#   -H 'origin: https://uvdeskrgtjyru-u353.vm.elestio.app:24580' \
-#   -H 'pragma: no-cache' \
-#   -H 'priority: u=1, i' \
-#   -H 'referer: https://uvdeskrgtjyru-u353.vm.elestio.app:24580/' \
-#   -H 'sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"' \
-#   -H 'sec-ch-ua-mobile: ?0' \
-#   -H 'sec-ch-ua-platform: "Windows"' \
-#   -H 'sec-fetch-dest: empty' \
-#   -H 'sec-fetch-mode: cors' \
-#   -H 'sec-fetch-site: same-origin' \
-#   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
-#   -H 'x-requested-with: XMLHttpRequest' \
-#   --data-raw 'member-prefix=member&customer-prefix=customer'
+  curl 'https://uvdeskrgtjyru-u353.vm.elestio.app:24580/wizard/xhr/website-configure' \
+  -H 'accept: */*' \
+  -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
+  -H 'cookie: auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMzMDU4Yjg1LTYxNTUtNGYwNy1hMmU4LTQxMDJkMGZhMTIzNyIsImVtYWlsIjoiYW1zZWxsZW0uam9zZXBoQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFVMeHlycWtoME05eE84MDJuMHlBL2U4cjNsOWJHSTMwZU5MVjNNcUR3NzRCMTdtQ2hPQjBHIiwicHJvdmlkZXJOYW1lIjoiTE9DQUwiLCJuYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiaXNTdXBlckFkbWluIjpmYWxzZSwiYmlvIjpudWxsLCJhdWRpZW5jZSI6MCwicGljdHVyZUlkIjpudWxsLCJwcm92aWRlcklkIjoiIiwidGltZXpvbmUiOjAsImNyZWF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsInVwZGF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImxhc3RSZWFkTm90aWZpY2F0aW9ucyI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImludml0ZUlkIjpudWxsLCJhY3RpdmF0ZWQiOnRydWUsIm1hcmtldHBsYWNlIjp0cnVlLCJhY2NvdW50IjpudWxsLCJjb25uZWN0ZWRBY2NvdW50IjpmYWxzZSwibGFzdE9ubGluZSI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImlhdCI6MTczMzA1ODI4MX0._xkpxkZ0oO74pV90OT2VRX5EdlVyxZIoSjWppsGC988; PHPSESSID=lv0mp9us589nv2n5j6n6765570' \
+  -H 'origin: https://uvdeskrgtjyru-u353.vm.elestio.app:24580' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://uvdeskrgtjyru-u353.vm.elestio.app:24580/' \
+  -H 'sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
+  -H 'x-requested-with: XMLHttpRequest' \
+  --data-raw 'member-prefix=member&customer-prefix=customer'
 
-#   curl 'https://uvdeskrgtjyru-u353.vm.elestio.app:24580/wizard/xhr/load/configurations' \
-#   -X 'POST' \
-#   -H 'accept: */*' \
-#   -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
-#   -H 'cache-control: no-cache' \
-#   -H 'content-length: 0' \
-#   -H 'cookie: auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMzMDU4Yjg1LTYxNTUtNGYwNy1hMmU4LTQxMDJkMGZhMTIzNyIsImVtYWlsIjoiYW1zZWxsZW0uam9zZXBoQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFVMeHlycWtoME05eE84MDJuMHlBL2U4cjNsOWJHSTMwZU5MVjNNcUR3NzRCMTdtQ2hPQjBHIiwicHJvdmlkZXJOYW1lIjoiTE9DQUwiLCJuYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiaXNTdXBlckFkbWluIjpmYWxzZSwiYmlvIjpudWxsLCJhdWRpZW5jZSI6MCwicGljdHVyZUlkIjpudWxsLCJwcm92aWRlcklkIjoiIiwidGltZXpvbmUiOjAsImNyZWF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsInVwZGF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImxhc3RSZWFkTm90aWZpY2F0aW9ucyI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImludml0ZUlkIjpudWxsLCJhY3RpdmF0ZWQiOnRydWUsIm1hcmtldHBsYWNlIjp0cnVlLCJhY2NvdW50IjpudWxsLCJjb25uZWN0ZWRBY2NvdW50IjpmYWxzZSwibGFzdE9ubGluZSI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImlhdCI6MTczMzA1ODI4MX0._xkpxkZ0oO74pV90OT2VRX5EdlVyxZIoSjWppsGC988; PHPSESSID=lv0mp9us589nv2n5j6n6765570' \
-#   -H 'origin: https://uvdeskrgtjyru-u353.vm.elestio.app:24580' \
-#   -H 'pragma: no-cache' \
-#   -H 'priority: u=1, i' \
-#   -H 'referer: https://uvdeskrgtjyru-u353.vm.elestio.app:24580/' \
-#   -H 'sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"' \
-#   -H 'sec-ch-ua-mobile: ?0' \
-#   -H 'sec-ch-ua-platform: "Windows"' \
-#   -H 'sec-fetch-dest: empty' \
-#   -H 'sec-fetch-mode: cors' \
-#   -H 'sec-fetch-site: same-origin' \
-#   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
-#   -H 'x-requested-with: XMLHttpRequest'
+  curl 'https://uvdeskrgtjyru-u353.vm.elestio.app:24580/wizard/xhr/load/configurations' \
+  -X 'POST' \
+  -H 'accept: */*' \
+  -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
+  -H 'cache-control: no-cache' \
+  -H 'content-length: 0' \
+  -H 'cookie: auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMzMDU4Yjg1LTYxNTUtNGYwNy1hMmU4LTQxMDJkMGZhMTIzNyIsImVtYWlsIjoiYW1zZWxsZW0uam9zZXBoQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFVMeHlycWtoME05eE84MDJuMHlBL2U4cjNsOWJHSTMwZU5MVjNNcUR3NzRCMTdtQ2hPQjBHIiwicHJvdmlkZXJOYW1lIjoiTE9DQUwiLCJuYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiaXNTdXBlckFkbWluIjpmYWxzZSwiYmlvIjpudWxsLCJhdWRpZW5jZSI6MCwicGljdHVyZUlkIjpudWxsLCJwcm92aWRlcklkIjoiIiwidGltZXpvbmUiOjAsImNyZWF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsInVwZGF0ZWRBdCI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImxhc3RSZWFkTm90aWZpY2F0aW9ucyI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImludml0ZUlkIjpudWxsLCJhY3RpdmF0ZWQiOnRydWUsIm1hcmtldHBsYWNlIjp0cnVlLCJhY2NvdW50IjpudWxsLCJjb25uZWN0ZWRBY2NvdW50IjpmYWxzZSwibGFzdE9ubGluZSI6IjIwMjQtMTItMDFUMTM6MDQ6NDEuNDk0WiIsImlhdCI6MTczMzA1ODI4MX0._xkpxkZ0oO74pV90OT2VRX5EdlVyxZIoSjWppsGC988; PHPSESSID=lv0mp9us589nv2n5j6n6765570' \
+  -H 'origin: https://uvdeskrgtjyru-u353.vm.elestio.app:24580' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://uvdeskrgtjyru-u353.vm.elestio.app:24580/' \
+  -H 'sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
+  -H 'x-requested-with: XMLHttpRequest'
