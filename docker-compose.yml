@@ -1,0 +1,66 @@
+networks:
+  public:
+    name: proxy
+    external: false
+
+version: "3"
+services:
+  uvdesk:
+    user: 0:0
+    image: dietermartens/uvdesk
+    environment:
+      # installation in dev, change it after installation to prod
+      - APP_ENV=dev
+      - APP_SECRET=
+      - TZ=Europe/Brussels
+      - APP_TIMEZONE=Europe/Brussels
+      - APP_CURRENCY=EUR
+      - CRON_USER1=root
+      - CRON_SCHEDULE1=*/5 * * * *
+    restart: always
+    ports:
+      - 172.17.0.1:50196:80
+    networks:
+      - public
+    volumes:
+      - uvdesk_app:/var/www/html:rw
+    links:
+      - db
+
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    networks:
+      - public
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - 172.17.0.1:24831:3306
+
+  pma:
+    image: elestio/phpmyadmin
+    restart: always
+    links:
+      - db:db
+    ports:
+      - "172.17.0.1:36254:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: ${DATABASE_PASSWORD}
+      UPLOAD_LIMIT: 500M
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    depends_on:
+      - db
+
+volumes:
+  uvdesk_app:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/uvdesk_app
+      o: bind
