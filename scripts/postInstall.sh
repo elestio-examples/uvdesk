@@ -450,10 +450,12 @@ curl http://${target}/wizard/xhr/verify-database-credentials \
 
 docker-compose down;
 
-sed -i "s|\[0 => 'https://${DOMAIN}'\]|\[0 => '//'\]|g" ./uvdesk_app/var/cache/prod/Container*/getUvdeskExtension_AssetsManagerService.php
 
 sed -i "s~APP_ENV=dev~APP_ENV=prod~g" ./docker-compose.yml
 
 docker-compose up -d;
 
 sleep 20s;
+
+
+sed -i "s|\[0 => 'https://${DOMAIN}'\]|\[0 => '//'\]|g" ./uvdesk_app/var/cache/prod/Container*/getUvdeskExtension_AssetsManagerService.php
