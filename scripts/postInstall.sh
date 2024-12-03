@@ -285,10 +285,84 @@ sed -i "s|site_url: 'localhost:8000'|site_url: '${DOMAIN}'|g" ./uvdesk_app/confi
 
 sed -i "s|        // Create a message|        // Create a message\n\n        \$content = str_replace('http://', 'https://', \$content);\n|g" ./uvdesk_app/vendor/uvdesk/core-framework/Services/EmailService.php
 
+sed -i "s|\$_SESSION\['DB_CONFIG'\]\['host'\]|'172.17.0.1'|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
+sed -i "s|\$_SESSION\['DB_CONFIG'\]\['port'\]|'24831'|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
+sed -i "s|\$_SESSION\['DB_CONFIG'\]\['version'\]|''|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
+sed -i "s|\$_SESSION\['DB_CONFIG'\]\['username'\]|'root'|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
+sed -i "s|\$_SESSION\['DB_CONFIG'\]\['password'\]|'${DATABASE_PASSWORD}'|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
+sed -i "s|\$_SESSION\['DB_CONFIG'\]\['database'\]|'uvdesk'|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
+sed -i "s|\$_SESSION\['DB_CONFIG'\]\['createDatabase'\]|1|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
+
+sed -i "s|\$request->request->get('name')|'admin'|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
+sed -i "s|\$request->request->get('email')|'${ADMIN_EMAIL}'|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
+sed -i "s|\$request->request->get('password')|'${ADMIN_PASSWORD}'|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
+sed -i "s|array_values(\$_SESSION\['USER_DETAILS'\])|\['admin','${ADMIN_EMAIL}','${ADMIN_PASSWORD}'\]|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
+sed -i "s|\$_SESSION\['USER_DETAILS'\]\['name'\]|'admin'|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
+sed -i "s|\$_SESSION\['USER_DETAILS'\]\['email'\]|'${ADMIN_EMAIL}'|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
+
+sed -i "s|\[0 => 'https://${DOMAIN}']|'//'|g" ./uvdesk_app/var/cache/prod/ContainerNlMEQbo/getUvdeskExtension_AssetsManagerService.php
+
+
+
 docker-compose up -d;
 sleep 15s;
 
 target=$(docker-compose port uvdesk 80)
+
+curl http://${target}/wizard/xhr/check-requirements \
+  -H 'accept: */*' \
+  -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
+  -H 'x-requested-with: XMLHttpRequest' \
+  --data-raw 'specification=php-version'
+
+  curl http://${target}/wizard/xhr/check-requirements \
+  -H 'accept: */*' \
+  -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
+  -H 'x-requested-with: XMLHttpRequest' \
+  --data-raw 'specification=php-extensions'
+
+  curl http://${target}/wizard/xhr/check-requirements \
+  -H 'accept: */*' \
+  -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
+  -H 'x-requested-with: XMLHttpRequest' \
+  --data-raw 'specification=php-maximum-execution'
+
+  curl http://${target}/wizard/xhr/check-requirements \
+  -H 'accept: */*' \
+  -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
+  -H 'x-requested-with: XMLHttpRequest' \
+  --data-raw 'specification=php-envfile-permission'
+
+  curl http://${target}/wizard/xhr/check-requirements \
+  -H 'accept: */*' \
+  -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
+  -H 'x-requested-with: XMLHttpRequest' \
+  --data-raw 'specification=php-configfiles-permission'
 
 curl http://${target}/wizard/xhr/verify-database-credentials \
   -H 'accept: */*' \
@@ -316,6 +390,15 @@ curl http://${target}/wizard/xhr/verify-database-credentials \
   -H 'accept: */*' \
   -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
   -H 'cache-control: no-cache' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
+  -H 'x-requested-with: XMLHttpRequest'
+
+  curl http://${target}/wizard/xhr/website-configure \
+  -H 'accept: */*' \
+  -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
+  -H 'cache-control: no-cache' \
   -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
   -H 'pragma: no-cache' \
   -H 'priority: u=1, i' \
@@ -333,3 +416,44 @@ curl http://${target}/wizard/xhr/verify-database-credentials \
   -H 'priority: u=1, i' \
   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
   -H 'x-requested-with: XMLHttpRequest'
+
+  curl http://${target}/wizard/xhr/load/migrations \
+  -X 'POST' \
+  -H 'accept: */*' \
+  -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
+  -H 'cache-control: no-cache' \
+  -H 'content-length: 0' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
+  -H 'x-requested-with: XMLHttpRequest'
+
+  curl http://${target}/wizard/xhr/load/entities \
+  -X 'POST' \
+  -H 'accept: */*' \
+  -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
+  -H 'cache-control: no-cache' \
+  -H 'content-length: 0' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
+  -H 'x-requested-with: XMLHttpRequest'
+
+  curl http://${target}/wizard/xhr/load/super-user \
+  -X 'POST' \
+  -H 'accept: */*' \
+  -H 'accept-language: fr,fr-FR;q=0.9,en-US;q=0.8,en;q=0.7,he;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja;q=0.3' \
+  -H 'cache-control: no-cache' \
+  -H 'content-length: 0' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
+  -H 'x-requested-with: XMLHttpRequest'
+
+docker-compose down;
+
+sed -i "s~APP_ENV=dev~APP_ENV=prod~g" ./docker-compose.yml
+
+docker-compose up -d;
+
+sleep 20s;
