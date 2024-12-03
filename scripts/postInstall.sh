@@ -300,8 +300,6 @@ sed -i "s|array_values(\$_SESSION\['USER_DETAILS'\])|\['admin','${ADMIN_EMAIL}',
 sed -i "s|\$_SESSION\['USER_DETAILS'\]\['name'\]|'admin'|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
 sed -i "s|\$_SESSION\['USER_DETAILS'\]\['email'\]|'${ADMIN_EMAIL}'|g" ./uvdesk_app/src/Controller/ConfigureHelpdesk.php
 
-sed -i "s|\[0 => 'https://${DOMAIN}'\]|\[0 => '//'\]|g" ./uvdesk_app/var/cache/prod/Container*/getUvdeskExtension_AssetsManagerService.php
-
 
 
 docker-compose up -d;
@@ -451,6 +449,8 @@ curl http://${target}/wizard/xhr/verify-database-credentials \
   -H 'x-requested-with: XMLHttpRequest'
 
 docker-compose down;
+
+sed -i "s|\[0 => 'https://${DOMAIN}'\]|\[0 => '//'\]|g" ./uvdesk_app/var/cache/prod/Container*/getUvdeskExtension_AssetsManagerService.php
 
 sed -i "s~APP_ENV=dev~APP_ENV=prod~g" ./docker-compose.yml
 
