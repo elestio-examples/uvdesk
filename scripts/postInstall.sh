@@ -167,11 +167,6 @@ framework:
 
     trusted_proxies: '*'
     trusted_headers: ['x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-forwarded-port']
-    assets:
-        base_urls: ['https://${DOMAIN}']
-    router:
-        default_uri: 'https://${DOMAIN}'
-        https_port: 443
 
 when@test:
     framework:
@@ -459,4 +454,3 @@ sleep 30s;
 
 curl http://${target}/en/member/login
 
-sed -i "s|\[0 => 'https://${DOMAIN}'\]|\[0 => '//'\]|g" ./uvdesk_app/var/cache/prod/Container*/getUvdeskExtension_AssetsManagerService.php
