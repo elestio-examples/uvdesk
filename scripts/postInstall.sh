@@ -455,7 +455,8 @@ sed -i "s~APP_ENV=dev~APP_ENV=prod~g" ./docker-compose.yml
 
 docker-compose up -d;
 
-sleep 20s;
+sleep 30s;
 
+curl http://${target}/en/member/login
 
 sed -i "s|\[0 => 'https://${DOMAIN}'\]|\[0 => '//'\]|g" ./uvdesk_app/var/cache/prod/Container*/getUvdeskExtension_AssetsManagerService.php
