@@ -281,6 +281,8 @@ EOT
 
 sed -i "s|support_email: ~|support_email:\n        id: ${ADMIN_EMAIL}\n        name: UVDesk Community\n        mailer_id: mailer_0286|g" ./uvdesk_app/config/packages/uvdesk.yaml
 
+sed -i "s|site_url: 'localhost:8000'|site_url: 'https://${DOMAIN}'|g" ./uvdesk_app/config/packages/uvdesk.yaml
+
 
 docker-compose up -d;
 sleep 15s;

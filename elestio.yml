@@ -31,6 +31,8 @@ environments:
     value: "mysql://root:random_password@172.17.0.1:24831/uvdesk"
   - key: "DATABASE_PASSWORD"
     value: "random_password"
+  - key: "APP_SECRET"
+    value: "random_password"
 config:
   runTime: "dockerCompose"
   version: ""
